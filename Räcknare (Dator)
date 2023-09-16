@@ -1,0 +1,117 @@
+from tkinter import *
+
+U=0
+P=3
+Y=6
+
+def calculate_time():
+    """
+    This function calculates the result of a formula using input values from the user.
+    The formula is: svar= (Egen tid - (Tm - Pm/((75 + Pm)/Tm))) x ((75 + Pm)/Tm)
+    """
+    try:
+        # Get the input values
+        egen_tid = float(egen_tid_entry.get())
+        basta_tid = float(basta_tid_entry.get())
+        nastbasta_tid = float(nastbasta_tid_entry.get())
+        tredjebasta_tid = float(tredjebasta_tid_entry.get())
+        basta_poang = float(basta_poang_entry.get())
+        nastbasta_poang = float(nastbasta_poang_entry.get())
+        tredjebasta_poang = float(tredjebasta_poang_entry.get())
+        vem = int(vem_entry.get())
+        
+        # Calculate the result
+        pm = (basta_poang + nastbasta_poang + tredjebasta_poang) / 3
+        tm = (basta_tid + nastbasta_tid + tredjebasta_tid) / 3
+        svar = (egen_tid - (tm - pm / ((vem + pm) / tm))) * ((vem + pm) / tm)
+        
+        # Display the result
+        result_label.config(text='Din poäng blir: {:.2f} Grattis'.format(svar))
+    except ValueError as e:
+        # Display an error message
+        print(f"Error: {e}")
+        result_label.config(text='Invalid input')
+
+# Create the window
+root = Tk()
+root.title("Poängkalkylator")
+
+# Set the window size to match Computer
+root.geometry("600x400")
+
+# Set the window title
+root.title('Sverigepoängs kalkylator')
+
+# Set the background color
+root.config(bg='#F0F8FF')
+
+# Configure the window to be fullscreen
+root.attributes('-fullscreen', True)
+
+# Create the title label
+title_label = Label(root, text='Sverigepoängs kalkylator', bg='#228B22', fg='white', font=('Arial',16 , 'bold'))
+title_label.pack(side=TOP, fill=X, padx=10, pady=10)
+
+# Create the input frame
+input_frame = Frame(root, bg='#F0F8FF')
+input_frame.pack(side=TOP, fill=BOTH, expand=True)
+
+# Hidden space
+Hidden_label = Label(input_frame, text='Detta är bara en text för att jag ', bg='#F0F8FF', fg='white', font=('Arial', 10,))
+Hidden_label.grid(row=0, column=P, padx=10, pady=10)
+
+# Create the input boxes and labels
+egen_tid_label = Label(input_frame, text='Skriv din tid:', bg='#F0F8FF', fg='black', font=('Arial', 10))
+egen_tid_label.grid(row=0, column=U, padx=10, pady=10)
+egen_tid_entry = Entry(input_frame, bg='white', font=('Arial', 10))
+egen_tid_entry.grid(row=1, column=U, padx=10, pady=10)
+
+basta_tid_label = Label(input_frame, text='Skriv bästa tiden:', bg='#F0F8FF', fg='black', font=('Arial', 10))
+basta_tid_label.grid(row=2, column=U, padx=10, pady=10)
+basta_tid_entry = Entry(input_frame, bg='white', font=('Arial', 10))
+basta_tid_entry.grid(row=3, column=U, padx=10, pady=10)
+
+nastbasta_tid_label = Label(input_frame, text='Skriv nästbästa tiden:', bg='#F0F8FF', fg='black', font=('Arial', 10))
+nastbasta_tid_label.grid(row=4, column=U, padx=10, pady=10)
+nastbasta_tid_entry = Entry(input_frame, bg='white', font=('Arial', 10))
+nastbasta_tid_entry.grid(row=5, column=U, padx=10, pady=10)
+
+tredjebasta_tid_label = Label(input_frame, text='Skriv tredjebästa tiden:', bg='#F0F8FF', fg='black', font=('Arial', 10))
+tredjebasta_tid_label.grid(row=6, column=U, padx=10, pady=10)
+tredjebasta_tid_entry = Entry(input_frame, bg='white', font=('Arial', 10))
+tredjebasta_tid_entry.grid(row=7, column=U, padx=10, pady=10)
+
+basta_poang_label = Label(input_frame, text='Skriv bästa sverigepoängen:', bg='#F0F8FF', fg='black', font=('Arial', 10))
+basta_poang_label.grid(row=0, column=Y, padx=10, pady=10)
+basta_poang_entry = Entry(input_frame, bg='white', font=('Arial', 10))
+basta_poang_entry.grid(row=1, column=Y, padx=10, pady=10)
+
+nastbasta_poang_label = Label(input_frame, text='Skriv nästbästa sverigepoängen:', bg='#F0F8FF', fg='black', font=('Arial', 10))
+nastbasta_poang_label.grid(row=2, column=Y, padx=10, pady=10)
+nastbasta_poang_entry = Entry(input_frame, bg='white', font=('Arial', 10))
+nastbasta_poang_entry.grid(row=3, column=Y, padx=10, pady=10)
+
+tredjebasta_poang_label = Label(input_frame, text='Skriv tredjebästa sverigepoängen:', bg='#F0F8FF', fg='black', font=('Arial', 10))
+tredjebasta_poang_label.grid(row=4, column=Y, padx=10, pady=10)
+tredjebasta_poang_entry = Entry(input_frame, bg='white', font=('Arial', 10))
+tredjebasta_poang_entry.grid(row=5, column=Y, padx=10, pady=10)
+
+vem_label = Label(input_frame, text='Är du man skriv 75, är du kvinna skriv 90:', bg='#F0F8FF', fg='black', font=('Arial', 10))
+vem_label.grid(row=6, column=Y, padx=10, pady=10)
+vem_entry = Entry(input_frame, bg='white', font=('Arial', 10))
+vem_entry.grid(row=7, column=Y, padx=10, pady=10)
+
+# Create the result frame
+result_frame = Frame(root, bg='#F0F8FF')
+result_frame.pack(side=TOP, fill=BOTH, expand=True)
+
+# Create the result label
+result_label = Label(result_frame, text='', bg='#F0F8FF', fg='black', font=('Arial', 10), relief='solid', bd=2)
+result_label.pack(side=TOP, fill=X, padx=10, pady=10)
+
+# Create the button
+button = Button(root, text='Räkna', bg='red', fg='white', font=('Arial', 10), command=calculate_time)
+button.pack(side=TOP, padx=10, pady=10)
+
+# Start the main event loop
+root.mainloop()
