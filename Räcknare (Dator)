@@ -96,7 +96,7 @@ tredjebasta_poang_label.grid(row=4, column=Y, padx=10, pady=10)
 tredjebasta_poang_entry = Entry(input_frame, bg='white', font=('Arial', 10))
 tredjebasta_poang_entry.grid(row=5, column=Y, padx=10, pady=10)
 
-vem_label = Label(input_frame, text='Är du man skriv 75, är du kvinna skriv 90:', bg='#F0F8FF', fg='black', font=('Arial', 10))
+vem_label = Label(input_frame, text='Är du man skriv 75, är du kvinna skriv 60:', bg='#F0F8FF', fg='black', font=('Arial', 10))
 vem_label.grid(row=6, column=Y, padx=10, pady=10)
 vem_entry = Entry(input_frame, bg='white', font=('Arial', 10))
 vem_entry.grid(row=7, column=Y, padx=10, pady=10)
