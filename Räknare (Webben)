@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poängkalkylator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FFFFFF;
+      margin: 0;
+      padding: 0;
+      
+    }
+
+    .container {
+      width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .title {
+      background-color: #228B22;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .input-label {
+      margin-top: 10px;
+    }
+
+    .input-field {
+      width: calc(50% - 20px);
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    .result-label {
+      border: 2px solid black;
+      padding: 10px;
+      margin-top: 10px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .calculate-button {
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      display: block;
+      margin: 0 auto; /* Center the button horizontally */
+      margin-top: 20px; /* Add some top margin for spacing */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">Sverigepoängs kalkylator</div>
+
+    <div class="input-label">Skriv din tid:
+      <input type="number" id="egen_tid" class="input-field">
+    </div>
+
+    <div class="input-label">Skriv bästa tiden:
+      <input type="number" id="basta_tid" class="input-field">
+    </div>
+
+    <div class="input-label">Skriv nästbästa tiden:
+      <input type="number" id="nastbasta_tid" class="input-field">
+    </div>
+
+    <div class="input-label">Skriv tredjebästa tiden:
+      <input type="number" id="tredjebasta_tid" class="input-field">
+    </div>
+
+    <div class="input-label">Skriv bästa sverigepoängen:
+      <input type="number" id="basta_poang" class="input-field">
+    </div>
+
+    <div class="input-label">Skriv nästbästa sverigepoängen:
+      <input type="number" id="nastbasta_poang" class="input-field">
+    </div>
+
+    <div class="input-label">Skriv tredjebästa sverigepoängen:
+      <input type="number" id="tredjebasta_poang" class="input-field">
+    </div>
+
+    <div class="input-label">Är du man skriv 75, är du dam skriv 60:
+      <input type="number" id="vem" class="input-field">
+    </div>
+
+    <button class="calculate-button" onclick="calculateTime()">Räkna</button>
+
+    <div id="result" class="result-label"></div>
+  </div>
+
+  <script>
+    function calculateTime() {
+      const egen_tid = parseFloat(document.getElementById('egen_tid').value);
+      const basta_tid = parseFloat(document.getElementById('basta_tid').value);
+      const nastbasta_tid = parseFloat(document.getElementById('nastbasta_tid').value);
+      const tredjebasta_tid = parseFloat(document.getElementById('tredjebasta_tid').value);
+      const basta_poang = parseFloat(document.getElementById('basta_poang').value);
+      const nastbasta_poang = parseFloat(document.getElementById('nastbasta_poang').value);
+      const tredjebasta_poang = parseFloat(document.getElementById('tredjebasta_poang').value);
+      const vem = parseInt(document.getElementById('vem').value);
+
+      const pm = (basta_poang + nastbasta_poang + tredjebasta_poang) / 3;
+      const tm = (basta_tid + nastbasta_tid + tredjebasta_tid) / 3;
+      const svar = (egen_tid - (tm - pm / ((vem + pm) / tm))) * ((vem + pm) / tm);
+
+      const resultLabel = document.getElementById('result');
+      if (!isNaN(svar)) {
+        resultLabel.innerText = 'Din poäng blir: ' + svar.toFixed(2) + ' Grattis';
+      } else {
+        resultLabel.innerText = 'Invalid input';
+      }
+    }
+  </script>
+</body>
+
+</html>
